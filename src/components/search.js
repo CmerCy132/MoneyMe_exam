@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { View } from "react-native";
 import { TextInput } from "react-native-paper";
 import service from "../service/service";
 const SearchBar = (props) => {
@@ -10,11 +11,13 @@ const SearchBar = (props) => {
   }
 
   return (
-    <TextInput
-      label={"Search an Artist"}
-      value={text}
-      onChangeText={_onChangeText}
-    />
+    <View style={{ display: "flex", marginTop: 5 }}>
+      <TextInput
+        label={"Search an Artist"}
+        value={text}
+        onChangeText={_onChangeText}
+      />
+    </View>
   );
 };
 

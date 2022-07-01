@@ -1,3 +1,4 @@
+import Details from "./details";
 import Search from "./search";
 
-export default { Search };
+export default { Search, Details };

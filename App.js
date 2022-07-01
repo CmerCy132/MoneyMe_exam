@@ -16,6 +16,7 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen name="Search" component={screens.Search} />
+            <Stack.Screen name="Details" component={screens.Details} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

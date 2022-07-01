@@ -5,50 +5,27 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as searchActions from "../actions/searchAction";
 import Components from "../components";
 import styles from "../../styles";
-
-const moment = require("moment");
-const convertDate = (props) => {
-  try {
-    const samp = new Date(props);
-    const newDate = moment(samp).format("MMM YYYY");
-    // console.log("get new date : ", newDate);
-    return newDate;
-  } catch (error) {
-    console.log("get error : ", error);
-  }
-};
 const renderItem = ({ item }) =>
   item && (
-    <View
-      style={{
-        backgroundColor: "#f9c2ff",
-        padding: 20,
-        marginVertical: 8,
-        marginHorizontal: 16,
-      }}
-    >
-      <Text>{item.artistName}</Text>
+    <View>
       <Text>{item.collectionName}</Text>
-      <Text>{convertDate(item.releaseDate)}</Text>
     </View>
   );
 
 const getUserPref = async () => {
   try {
-    const value = await AsyncStorage.getItem("userPref")
+    const value = await AsyncStorage.getItem("userPref");
     if (value !== null) {
-      return value
+      return value;
     } else {
-      return true
+      return true;
     }
   } catch (error) {
-    return true
+    return true;
   }
-  
-
 };
 
-const Search = () => {
+const Search = ({ navigation }) => {
   const items = useSelector((state) => state.search.songs);
   const dispatch = useDispatch();
   const [sort, setSort] = useState(getUserPref());
@@ -85,7 +62,11 @@ const Search = () => {
       <View style={{ display: "flex" }}>
         <FlatList
           data={items ? items : []}
-          renderItem={renderItem}
+          renderItem={(item) => {
+            return (
+              <Components.ListItem item={item.item} navigation={navigation} />
+            );
+          }}
           initialNumToRender={5}
           keyExtractor={(items) => items.trackId}
         />

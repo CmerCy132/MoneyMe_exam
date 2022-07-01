@@ -1,1 +1,3 @@
 export const FETCH_ARTISTS = "FETCH_ARTISTS";
+export const SORT_BY_ALBUM = "SORT_BY_ALBUM";
+export const SORT_BY_RELEASE = "SORT_BY_RELEASE";

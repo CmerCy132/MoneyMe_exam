@@ -63,3 +63,13 @@ export const sortByRelease =
       data: tempList,
     });
   };
+
+export const getSongDetails =
+  (id = 0) =>
+  (dispatch) => {
+    console.log("Get id :", id);
+    dispatch({
+      type: "GET_SONG_DETAILS",
+      data: id,
+    });
+  };

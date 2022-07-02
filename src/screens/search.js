@@ -4,13 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as searchActions from "../actions/searchAction";
 import Components from "../components";
+import screens from "../screens";
 import styles from "../../styles";
-const renderItem = ({ item }) =>
-  item && (
-    <View>
-      <Text>{item.collectionName}</Text>
-    </View>
-  );
 
 const getUserPref = async () => {
   try {
@@ -25,7 +20,7 @@ const getUserPref = async () => {
   }
 };
 
-const Search = ({ navigation }) => {
+const Search = () => {
   const items = useSelector((state) => state.search.songs);
   const dispatch = useDispatch();
   const [sort, setSort] = useState(getUserPref());
@@ -59,18 +54,17 @@ const Search = ({ navigation }) => {
         handleSortAlbum={_handleSortAlbum}
         handleSortRelease={_handleSortRelease}
       />
-      <View style={{ display: "flex" }}>
+      <View style={{ display: "flex", maxHeight: 600 }}>
         <FlatList
           data={items ? items : []}
           renderItem={(item) => {
-            return (
-              <Components.ListItem item={item.item} navigation={navigation} />
-            );
+            return <Components.ListItem item={item.item} dispatch={dispatch} />;
           }}
           initialNumToRender={5}
           keyExtractor={(items) => items.trackId}
         />
       </View>
+      <screens.Details />
     </View>
   );
 };

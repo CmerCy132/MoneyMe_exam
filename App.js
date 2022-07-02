@@ -14,9 +14,8 @@ export default function App() {
       <StatusBar style="auto" />
       <Provider store={store}>
         <NavigationContainer>
-          <Stack.Navigator>
+          <Stack.Navigator initialRouteName="Search">
             <Stack.Screen name="Search" component={screens.Search} />
-            <Stack.Screen name="Details" component={screens.Details} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

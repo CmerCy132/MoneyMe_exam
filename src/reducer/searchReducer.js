@@ -2,6 +2,7 @@ import * as types from "../actions/types";
 
 const initialState = {
   songs: [],
+  song: {},
 };
 
 export default function searchReducer(state = initialState, action) {
@@ -22,6 +23,15 @@ export default function searchReducer(state = initialState, action) {
       return {
         ...state,
         songs: action.data,
+      };
+
+    case types.GET_SONG_DETAILS:
+      // console.log("get id :", action.data);
+      const songData = state.songs.find((item) => item.trackId == action.data);
+      // console.log("get song : ", song);
+      return {
+        ...state,
+        song: songData,
       };
 
     default:

@@ -1,6 +1,9 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Text } from "react-native-paper";
+import { useSelector, useDispatch } from "react-redux";
+import { triggerModal } from "../actions/modalAction";
+import { getSongDetails } from "../actions/searchAction";
 
 const moment = require("moment");
 const convertDate = (props) => {
@@ -14,17 +17,16 @@ const convertDate = (props) => {
   }
 };
 
-const _goToDetails = (navigation, props) => {
-  console.log("get nav : ", navigation);
+const _goToDetails = (props, dispatch) => {
   console.log("get props : ", props);
-  navigation.navigate("Details", props);
+  dispatch(triggerModal(true));
+  dispatch(getSongDetails(props.trackId));
+  // navigation.navigate("Details", props);
 };
 
 const ListItem = (props) => {
   return (
-    <TouchableOpacity
-      onPress={() => _goToDetails(props.navigation, props.item)}
-    >
+    <TouchableOpacity onPress={() => _goToDetails(props.item, props.dispatch)}>
       <View style={styles.container}>
         <Text variant="TitleLarge">Song: {props.item.trackName}</Text>
         <Text variant="LabelLarge">Artist: {props.item.artistName}</Text>
